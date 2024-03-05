@@ -15,16 +15,16 @@ export default function (){
                     <thead className="bg-gray-200 border-b">
                         <tr>
                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                #ID
+                                Id
                             </th>
                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                 Nombre completo
                             </th>
                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Estado
+                                Descripción
                             </th>
                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Opciones
+                                Estatus
                             </th>
                         </tr>
                     </thead>
@@ -37,11 +37,10 @@ export default function (){
                                 Mark
                             </td>
                             <td className="flex items-center text-sm  text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                {/* <IoCardOutline className="text-green-800" /> */}
-                                <span className='mx-2 text-green-800'>Pagada</span>
+                                Conexión a internet    
                             </td>
                             <td className="text-sm text-gray-900 font-light px-6 ">
-                                Ver orden    
+                                <span className='mx-2 text-green-800'>Finalizada</span>
                             </td>
 
                         </tr>
@@ -53,13 +52,10 @@ export default function (){
                                 Mark
                             </td>
                             <td className="flex items-center text-sm  text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-
-                                {/* <IoCardOutline className="text-red-800" /> */}
-                                <span className='mx-2 text-red-800'>No Pagada</span>
-
+                                Reseteo de usuario 
                             </td>
                             <td className="text-sm text-gray-900 font-light px-6 ">
-                                Ver orden    
+                                <span className='mx-2 text-red-800'>Detenida</span>
                             </td>
 
                         </tr>

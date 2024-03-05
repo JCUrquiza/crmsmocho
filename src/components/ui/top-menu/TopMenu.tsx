@@ -1,15 +1,22 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { FaHouseUser } from 'react-icons/fa';
-import { IoTicketOutline } from 'react-icons/io5';
+import { IoMenu, IoTicketOutline } from 'react-icons/io5';
+import { useAppDispatch } from '@/store';
+import { openSidebar } from '@/store/sidebar/sidebarSlice';
 
 export const TopMenu = () => {
 
+    const dispatch = useAppDispatch();
+
     return (
 
-        <nav className="fixed z-20 w-full bg-white/90 dark:bg-gray-900/80 backdrop-blur navbar shadow-2xl shadow-gray-600/5 border-b border-gray-100 dark:border-gray-800 peer-checked:navbar-active dark:shadow-none">
+        <nav className="flex px-5 justify-between">
+            {/* flex z-20 w-full bg-white/90 dark:bg-gray-900/80 backdrop-blur navbar shadow-2xl shadow-gray-600/5 border-b border-gray-100 dark:border-gray-800 peer-checked:navbar-active dark:shadow-none */}
             <div className="xl:container m-auto px-6 md:px-12 lg:px-6">
-                <div className="flex flex-wrap items-center justify-between gap-6 md:py-3 md:gap-0 lg:py-5">
+                <div className="flex flex-wrap items-center justify-between gap-6 md:py-3 md:gap-0">
                     <div className="w-full items-center flex justify-between lg:w-auto">
                         <a className="relative z-10" href="#">
                             <svg className="h-9 text-[#007FEC] dark:text-[#00B1FD]" viewBox="0 0 942 272" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,13 +53,14 @@ export const TopMenu = () => {
                                 </li>
                             </ul>
                         </div>
-    
-                        <div className="w-full space-y-2 border-primary/10 dark:border-gray-700 flex flex-col -ml-1 sm:flex-row lg:space-y-0 md:w-max lg:border-l">
 
-                            {/* TODO: Cambiar el Link por button porque se tendrá que eliminar la session */}
-                            <Link href={'/auth/login'} className="relative flex h-9 ml-auto items-center justify-center sm:px-6 before:absolute before:inset-0 before:rounded-full before:bg-red-600 dark:before:bg-sky-400 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
-                                <span className="relative text-sm font-semibold text-white dark:text-gray-900">Salir</span>                    
-                            </Link>
+                        <div className="w-full space-y-2 border-primary/10 dark:border-gray-700 flex flex-col -ml-1 sm:flex-row lg:space-y-0 md:w-max lg:border-l">
+                            <div className='flex'>
+                                <span className='mt-1 pr-2'>Menú</span>
+                                <button onClick={() => dispatch(openSidebar()) }>
+                                    <IoMenu size={30} />
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -3,7 +3,7 @@ import { Title } from '@/components';
 
 export default function () {
     return (
-        <div>
+        <div className='py-[-10]'>
 
             <Title title='Dashboard' subTitle='Welcome to the Dashboard Page!' />
 
@@ -12,8 +12,9 @@ export default function () {
                 <div className='pb-10'>
                     <h3>TODOS:</h3>
                     <ul className='px-10'>
-                        <li> - Menú de opciones para desplegarse en cualquier pantalla.</li>
+                        <li> - Menú de opciones para desplegarse en cualquier pantalla (Tipo SideMenu).</li>
                         <li> - Implementar Storage (Toolkit o Zustand).</li>
+                        <li> - Mejorar la distribución del topMenu</li>
                     </ul>
                 </div>
                 
@@ -27,6 +28,11 @@ export default function () {
                         peer-checked:rounded-[2%] peer-checked:h-96 peer-checked:w-80 peer-checked:opacity-100 peer-checked:visible
                         flex flex-col px-3 pt-12 invisible">
 		                <div className='flex flex-col gap-3'>
+			                <div className='w-full h-12 bg-green-600 rounded-xl flex justify-center items-center text-white font-bold'>
+                                <p className='text-center'>
+				                    Implementar pantalla de api´s (Pokemon, clima, etc).
+                                </p>
+			                </div>
 			                <div className='w-full h-12 bg-green-600 rounded-xl flex justify-center items-center text-white font-bold'>
 				                Sistema de Tickets
 			                </div>

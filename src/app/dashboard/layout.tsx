@@ -1,4 +1,5 @@
-import { TopMenu } from '@/components';
+import { Sidebar, TopMenu } from '@/components';
+import { Providers } from '@/store/Providers';
 
 export default function LoginLayout({
   children
@@ -9,11 +10,16 @@ export default function LoginLayout({
   return (
     <main className="min-h-screen">
 
-      <TopMenu />
+      <Providers>
+        
+        <TopMenu />
+        <Sidebar />
 
-      <div className="px-0 py-20 sm:px-10 ">
-        { children }
-      </div>
+        <div className="px-0 sm:px-10">
+          { children }
+        </div>
+
+      </Providers>
 
     </main>
   )
