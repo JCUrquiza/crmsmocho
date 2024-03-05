@@ -29,14 +29,19 @@ export const TopMenu = () => {
                             <ul className="space-y-6 tracking-wide font-medium text-base lg:text-sm lg:flex lg:space-y-0">
                                 <li className='mr-3'>
                                     <Link href={'/dashboard'} className="flex md:px-4 transition hover:text-primary dark:hover:text-primaryLight">
-                                        <FaHouseUser className='mr-2' size={30} />
                                         <span className='pt-1'>Home</span>
+                                        <FaHouseUser className='ml-2' size={30} />
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href={'/dashboard/tickets'} className="flex md:px-4 transition hover:text-primary dark:hover:text-primaryLight">
-                                        <IoTicketOutline size={30} />
-                                        <span className='ml-3 pt-1'>Sistema de Tickets</span>
+                                        <span className='mr-3 pt-1'>Sistema de Tickets</span>
+                                        <div className='relative'>
+                                            <span className='absolute text-xs rounded-full px-2 font-bold -top-2 -right-2 bg-blue-700 text-white'>
+                                                3
+                                            </span>
+                                            <IoTicketOutline size={30} />
+                                        </div>
                                     </Link>
                                 </li>
                             </ul>

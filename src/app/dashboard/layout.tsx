@@ -11,7 +11,7 @@ export default function LoginLayout({
 
       <TopMenu />
 
-      <div className="px-0 py-20 sm:px-10 bg-blue-400">
+      <div className="px-0 py-20 sm:px-10 ">
         { children }
       </div>
 
