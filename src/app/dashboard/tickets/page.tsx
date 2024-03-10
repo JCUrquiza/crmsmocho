@@ -1,5 +1,6 @@
 import React from 'react';
 import { Title } from '@/components';
+import { CrearTicket } from './ui/CrearTicket';
 
 export default function (){
 
@@ -7,6 +8,8 @@ export default function (){
         <div>
 
             <Title title='Sistema de Tickets' subTitle='Administración de tickets' />
+
+            <CrearTicket />
 
             <div className="pt-10 mb-10">
 
@@ -37,7 +40,7 @@ export default function (){
                                 Mark
                             </td>
                             <td className="flex items-center text-sm  text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                Conexión a internet    
+                                Conexión a internet
                             </td>
                             <td className="text-sm text-gray-900 font-light px-6 ">
                                 <span className='mx-2 text-green-800'>Finalizada</span>
@@ -52,7 +55,7 @@ export default function (){
                                 Mark
                             </td>
                             <td className="flex items-center text-sm  text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                Reseteo de usuario 
+                                Reseteo de usuario
                             </td>
                             <td className="text-sm text-gray-900 font-light px-6 ">
                                 <span className='mx-2 text-red-800'>Detenida</span>
