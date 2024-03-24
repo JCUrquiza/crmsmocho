@@ -2,7 +2,7 @@ import React from 'react';
 import { Title } from '@/components';
 import { CrearTicket } from './ui/CrearTicket';
 
-export default function (){
+export default function TicketPage(){
 
     return (
         <div>
