@@ -12,3 +12,111 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Titulo {
+  licenciado
+  ingeniero
+  arquitecto
+}
+
+model Area {
+  id                Int @id @default(autoincrement())
+  nombre            String
+
+  Puesto            Puesto[]
+  Usuario           Usuario[]
+}
+
+model Puesto {
+  id                Int @id @default(autoincrement())
+  nombre            String
+
+  Usuario           Usuario[]
+
+  // Relactions
+  area              Area @relation(fields: [areaId], references: [id])
+  areaId            Int
+}
+
+model Sucursal {
+  id                Int @id @default(autoincrement())
+  nombre            String
+  zona              String
+  calle             String
+  municipio         String
+  colonia           String
+  numeroInterior    String
+  numeroExterior    String
+  ciudad            String
+  correo            String
+  telefonoUno       String
+  telefonoDos       String
+
+  Usuario           Usuario[]
+  Tickets           Tickets[]
+}
+
+model CatalogoTicket {
+  id                Int @id @default(autoincrement())
+  nombre            String
+
+  Tickets           Tickets[]
+}
+
+model Estatus {
+  id                Int @id @default(autoincrement())
+  codigo            String
+  nombre            String
+  color             String
+
+  Usuario           Usuario[]
+  Tickets           Tickets[]
+}
+
+model Usuario {
+  id                Int @id @default(autoincrement())
+  nombres           String
+  apellidoPaterno   String
+  apellidoMaterno   String
+  titulo            Titulo
+  celular           String
+  correo            String
+
+  Tickets           Tickets[]
+
+  // Relations
+  area              Area @relation(fields: [areaId], references: [id])
+  areaId            Int
+
+  puesto            Puesto @relation(fields: [puestoId], references: [id])
+  puestoId          Int
+
+  sucursal          Sucursal @relation(fields: [sucursalId], references: [id])
+  sucursalId        Int
+
+  estatus           Estatus @relation(fields: [estatusId], references: [id])
+  estatusId         Int
+}
+
+model Tickets {
+  id                Int @id @default(autoincrement())
+  descripcion       String
+  fechaCreacion     DateTime @default(now())
+  fechaAtendido     DateTime
+  fechaResuelto     DateTime
+
+  // Relations
+  catalogoTicket    CatalogoTicket @relation(fields: [catalogoTicketId], references: [id])
+  catalogoTicketId  Int
+
+  usuarioCreador    Usuario @relation(fields: [usuarioCreadorId], references: [id])
+  usuarioCreadorId  Int
+
+  estatus           Estatus @relation(fields: [estatusId], references: [id])
+  estatusId         Int
+
+  sucursal          Sucursal @relation(fields: [sucursalId], references: [id])
+  sucursalId        Int
+
+  usuarioResuelve   Int
+}
