@@ -1,24 +1,37 @@
 import React from 'react';
-import { Title } from '@/components';
+import { Subtitle, Title } from '@/components';
 
 export const AreasForm = () => {
 
     return (
 
-        <div>
+        <div className='pt-5'>
 
-            {/* TODO: Crear título para elementos de formulario */}
-            <Title title='Creación de áreas' />
+            <Subtitle title='Ingresa los datos requeridos' />
 
             <form>
 
-                <label htmlFor="email">Área:</label>
-                <input className="px-5 py-2 border bg-gray-200 rounded mb-5 text-black" type="email" />
+                <div className='flex flex-row'>
 
-                <label htmlFor="email">Puesto:</label>
-                <input className="px-5 py-2 border bg-gray-200 rounded mb-5 text-black" type="email" />
+                    <div className='flex flex-col w-1/2 m-3'>
 
+                        <label htmlFor="email">Área:</label>
+                        <input className="px-5 py-2 border bg-gray-200 rounded mb-5 text-black" type="email" />
+
+                        <div className='flex justify-start'>
+                            <button className='btn-primary mt-6 w-1/2'>Enviar</button>
+                        </div>
+
+                    </div>
+
+                    <div className='flex flex-col w-1/2 m-3'>
+
+                        <label htmlFor="email">Puesto:</label>
+                        <input className="px-5 py-2 border bg-gray-200 rounded mb-5 text-black" type="email" />
                 
+                    </div>
+
+                </div>
 
             </form>
 

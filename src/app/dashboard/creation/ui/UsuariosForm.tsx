@@ -1,12 +1,21 @@
 import React from 'react';
+import { Subtitle } from '@/components';
 
 export const UsuariosForm = () => {
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log('Enviando formulario...');
+        
+    }
+
     return (
 
-        <div>
+        <div className='pt-5'>
 
-            <form>
+            <Subtitle title='Ingresa los datos requeridos' />
+
+            <form onSubmit={handleSubmit}>
 
                 <div className='flex flex-row' >
 
@@ -45,6 +54,10 @@ export const UsuariosForm = () => {
 
                         <label htmlFor="email">Correo:</label>
                         <input className="px-5 py-2 border bg-gray-200 rounded mb-5 text-black" type="email" tabIndex={8} />
+
+                        <div className='flex justify-end'>
+                            <button className='btn-primary mt-6 w-1/2'>Enviar</button>
+                        </div>
 
                     </div>
 
