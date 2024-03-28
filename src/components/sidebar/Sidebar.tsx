@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link';
-import { IoClose, IoPerson } from 'react-icons/io5'
+import { IoBrush, IoClose, IoPerson } from 'react-icons/io5'
 import clsx from 'clsx';
 import { useAppDispatch, useAppSelector } from '@/store'
 import { closeSidebar } from '@/store/sidebar/sidebarSlice';
@@ -36,7 +36,8 @@ export const Sidebar = () => {
                     clsx(
                         "fixed p-5 right-0 top-0 w-[300px] h-screen bg-white z-20 shadow-2xl transform transition-all duration-300",
                         {
-                            'translate-x-full' : !stateSidebar
+                            'translate-x-full' : !stateSidebar,
+                            'transition-transform ease-in-out': !stateSidebar
                         }
                     )
                 }
@@ -48,12 +49,25 @@ export const Sidebar = () => {
                     onClick={ () => dispatch(closeSidebar()) }
                 />
 
-                <Link href={'/'} className='flex items-center mt-20 p-2 hover:bg-gray-100 rounded transition-all' style={{ color: 'black' }}>
+                <Link 
+                    href={'/dashboard/profile'} 
+                    className='flex items-center mt-20 p-2 hover:bg-gray-100 rounded transition-all' 
+                    style={{ color: 'black' }}
+                    onClick={() => dispatch(closeSidebar())}
+                    >
                     <IoPerson size={30} />
                     <span className='ml-3 text-xl'>Perfil</span>
                 </Link>
 
-              
+                <Link
+                    href={'/dashboard/creation'}
+                    className='flex items-center mt-30 p-2 hover:bg-gray-100 rounded transition-all' 
+                    style={{ color: 'black' }}
+                    onClick={() => dispatch(closeSidebar())}
+                >
+                    <IoBrush size={30} />
+                    <span className='ml-3 text-xl'>Creación</span>
+                </Link>
 
             </nav>
 
