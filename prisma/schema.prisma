@@ -24,7 +24,6 @@ model Area {
   nombre            String
 
   Puesto            Puesto[]
-  Usuario           Usuario[]
 }
 
 model Puesto {
@@ -47,6 +46,7 @@ model Sucursal {
   colonia           String
   numeroInterior    String
   numeroExterior    String
+  codigoPostal      String
   ciudad            String
   correo            String
   telefonoUno       String
@@ -85,9 +85,6 @@ model Usuario {
   Tickets           Tickets[]
 
   // Relations
-  area              Area @relation(fields: [areaId], references: [id])
-  areaId            Int
-
   puesto            Puesto @relation(fields: [puestoId], references: [id])
   puestoId          Int
 
