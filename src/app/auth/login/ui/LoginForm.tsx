@@ -4,6 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import clsx from 'clsx';
+import { loginUser } from '@/actions/auth/login';
 
 type FormInputs = {
     email: string;
@@ -22,9 +23,11 @@ export const LoginForm = () => {
 
         if ( !data ) return;
 
-        router.replace('/dashboard');
+        const resp = await loginUser( data.email );
+        console.log({ resp });
+        
 
-
+        // router.replace('/dashboard');
     }
 
     return (
