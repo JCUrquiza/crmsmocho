@@ -14,9 +14,9 @@ datasource db {
 }
 
 enum Titulo {
-  licenciado
-  ingeniero
-  arquitecto
+  Licenciado
+  Ingeniero
+  Arquitecto
 }
 
 model Area {
@@ -81,6 +81,7 @@ model Usuario {
   titulo            Titulo
   celular           String
   correo            String
+  password          String
 
   Tickets           Tickets[]
 

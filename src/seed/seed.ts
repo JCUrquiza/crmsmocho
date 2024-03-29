@@ -1,4 +1,5 @@
 // import React from 'react';
+import bcryptjs from 'bcryptjs';
 
 interface SeedArea {
     nombre: string;
@@ -36,6 +37,7 @@ interface SeedUser {
     apellidoMaterno: string;
     titulo: ValidTitulo;
     celular: string;
+    password: string;
     correo: string;
     puestoId: string;
     sucursalId: string;
@@ -94,6 +96,7 @@ export const initialData: SeedData = {
         titulo: 'Ingeniero',
         celular: '5513243423',
         correo: 'juan@google.com',
+        password: bcryptjs.hashSync('123456'),
         puestoId: '1',
         sucursalId: '1',
         estatusId: '1'

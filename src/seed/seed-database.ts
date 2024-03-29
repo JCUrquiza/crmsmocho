@@ -54,12 +54,6 @@ async function main() {
     const sucursalId = await prisma.sucursal.findFirst();
     const estatusId = await prisma.estatus.findFirst();
 
-    console.log(puestoId?.id);
-    console.log(sucursalId?.id);
-    console.log(estatusId?.id);
-    console.log(usuario);
-    
-
     // Usuario
     // TODO: Falta agregar campo password
     await prisma.usuario.create({
@@ -67,9 +61,10 @@ async function main() {
             nombres: usuario.nombres,
             apellidoPaterno: usuario.apellidoPaterno,
             apellidoMaterno: usuario.apellidoMaterno,
-            titulo: 'ingeniero',
+            titulo: 'Ingeniero',
             celular: usuario.celular,
             correo: usuario.correo,
+            password: usuario.password,
             puestoId: puestoId!.id,
             sucursalId: sucursalId!.id,
             estatusId: estatusId!.id
