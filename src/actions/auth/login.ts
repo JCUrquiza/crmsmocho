@@ -1,8 +1,9 @@
 'use server';
 
 import prisma from "@/lib/prisma";
+import bcryptjs from 'bcryptjs';
 
-export const loginUser = async( email: string ) => {
+export const loginUser = async( email: string, password: string ) => {
 
     try {
         
@@ -15,12 +16,18 @@ export const loginUser = async( email: string ) => {
         if ( user === null ) {
             return {
                 ok: false,
-                message: 'Usuario no enconstrado'
+                message: 'Datos proporcionados inexistentes.'
             }
         };
-
-        console.log(user);
-
+        
+        // Comparar las contraseñas:
+        if ( !bcryptjs.compareSync( password, user?.password ) ) {
+            return {
+                ok: false,
+                message: 'Credenciales incorrectas.'
+            }
+        };
+    
         return {
             ok: true,
             message: user

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import clsx from 'clsx';
@@ -14,20 +14,26 @@ type FormInputs = {
 export const LoginForm = () => {
 
     const router = useRouter();
+    const [messageErrorLogin, setMessageErrorLogin] = useState('');
+    const [errorLogin, setErrorLogin] = useState(false);
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
 
     const onSubmit: SubmitHandler<FormInputs> = async(data) => {
-        // Redireccionar a '/dashboard' si el usuario se logea correctamente.
-        console.log(data);
-
         if ( !data ) return;
 
-        const resp = await loginUser( data.email );
-        console.log({ resp });
+        const resp = await loginUser( data.email, data.password );
         
+        if ( resp?.ok === false ) {
+            if ( typeof resp.message === 'string' ) {
+                setErrorLogin(true);
+                setMessageErrorLogin( resp?.message );
+            }
+        }
 
-        // router.replace('/dashboard');
+        if ( resp?.ok) {
+            router.replace('/dashboard');
+        }
     }
 
     return (
@@ -36,10 +42,9 @@ export const LoginForm = () => {
 
             {
                 errors.email?.type === 'required' && (
-                    <span className='text-red-600'>El email es obligatorio</span>
+                    <span className='text-red-600'>El correo es obligatorio</span>
                 )
             }
-
             <label htmlFor="email">Correo electrónico</label>
             <input 
                 className={
@@ -53,6 +58,11 @@ export const LoginForm = () => {
                 {...register('email', { required: true, pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ })}
             />
 
+            {
+                errors.password?.type === 'required' && (
+                    <span className='text-red-600'>La contraseña es obligatoria</span>
+                    )
+                }
             <label htmlFor="password">Contraseña</label>
             <input 
                 className={
@@ -65,10 +75,15 @@ export const LoginForm = () => {
                 {...register('password', { required: true })}
             />
 
+            {
+                errorLogin && (
+                    <span className='text-red-600'>{ messageErrorLogin }</span>
+                )
+            }
             <button className='btn-primary text-center mt-5 w-full'>
                 Ingresar
             </button>
-
+            
             {/* divisor line */ }
             <div className="flex items-center my-5">
                 <div className="flex-1 border-t border-gray-500"></div>
