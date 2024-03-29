@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link';
-import { IoBrush, IoClose, IoPerson } from 'react-icons/io5'
+import { IoBrush, IoClose, IoLogOut, IoPerson } from 'react-icons/io5'
 import clsx from 'clsx';
 import { useAppDispatch, useAppSelector } from '@/store'
 import { closeSidebar } from '@/store/sidebar/sidebarSlice';
@@ -68,6 +68,20 @@ export const Sidebar = () => {
                     <IoBrush size={30} />
                     <span className='ml-3 text-xl'>Creación</span>
                 </Link>
+
+                <div className='w-full h-px bg-gray-200 my-10'>
+
+                    <Link
+                        href={'/'}
+                        className='flex items-center mt-70 p-2 hover:bg-gray-100 rounded transition-all' 
+                        style={{ color: 'black' }}
+                        onClick={() => dispatch(closeSidebar())}
+                    >
+                        <IoLogOut size={30} />
+                        <span className='ml-3 text-xl'>Salir/Logout</span>
+                    </Link>
+
+                </div>
 
             </nav>
 
