@@ -9,7 +9,29 @@ export const loginUser = async( email: string, password: string ) => {
         
         const user = await prisma.usuario.findFirst({
             where: {
-                correo: email
+                correo: email,
+                estatus: {
+                    codigo: 'ESTACT'
+                }
+            },
+            select: {
+                nombres: true,
+                apellidoPaterno: true,
+                apellidoMaterno: true,
+                password: true,
+                celular: true,
+                correo: true,
+                titulo: true,
+                puesto: {
+                    select: {
+                        nombre: true
+                    }
+                },
+                sucursal: {
+                    select: {
+                        nombre: true
+                    }
+                }
             }
         });
 

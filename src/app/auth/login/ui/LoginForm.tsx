@@ -5,10 +5,24 @@ import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import clsx from 'clsx';
 import { loginUser } from '@/actions/auth/login';
+import { store } from '@/store';
+import { saveDataUser } from '@/store/user/userSlice';
 
 type FormInputs = {
     email: string;
     password: string;
+}
+
+interface UserData {
+    password: string;
+    nombres: string;
+    apellidoPaterno: string;
+    apellidoMaterno: string;
+    celular: string;
+    correo: string;
+    titulo: string;
+    puesto: { nombre: string }
+    sucursal: { nombre: string }
 }
 
 export const LoginForm = () => {
@@ -21,9 +35,9 @@ export const LoginForm = () => {
 
     const onSubmit: SubmitHandler<FormInputs> = async(data) => {
         if ( !data ) return;
-
+        // Implementación del server action para loggeo
         const resp = await loginUser( data.email, data.password );
-        
+        // Condicional para mostrar el mensaje de error si no se logró autenticar al usuario
         if ( resp?.ok === false ) {
             if ( typeof resp.message === 'string' ) {
                 setErrorLogin(true);
@@ -31,7 +45,22 @@ export const LoginForm = () => {
             }
         }
 
+        // En caso de éxito
         if ( resp?.ok) {
+            // Constante para tener el tipo de la respuesta
+            const userData = resp.message as UserData;
+            // Almacenar la información del usuario en el storage
+            store.dispatch( saveDataUser({
+                nombres: userData.nombres,
+                apellidoPaterno: userData.apellidoPaterno,
+                apellidoMaterno: userData.apellidoMaterno,
+                celular: userData.celular,
+                correo: userData.correo,
+                titulo: userData.titulo,
+                puestoNombre: userData.puesto.nombre,
+                sucursalNombre: userData.sucursal.nombre
+            }));
+            // Y reenvío a dashboard
             router.replace('/dashboard');
         }
     }

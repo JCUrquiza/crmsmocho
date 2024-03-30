@@ -1,10 +1,12 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import sidebarReducer from './sidebar/sidebarSlice';
+import userReducer from './user/userSlice';
 
 export const store = configureStore({
     reducer: {
-        sedebar: sidebarReducer,
+        sidebar: sidebarReducer,
+        user: userReducer
     }
 });
 
