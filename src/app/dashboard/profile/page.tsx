@@ -1,9 +1,11 @@
-
+import { UserInfo } from './ui/UserInfo';
 
 export default function ProfilePage() {
 
     return (
-        <h3>PerfilPage...!!</h3>
+        <div>
+            <UserInfo />
+        </div>
     )
 
 }

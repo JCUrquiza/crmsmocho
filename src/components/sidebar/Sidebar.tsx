@@ -9,7 +9,7 @@ import { closeSidebar } from '@/store/sidebar/sidebarSlice';
 
 export const Sidebar = () => {
 
-    const stateSidebar = useAppSelector( state => state.sedebar.sidebar );
+    const stateSidebar = useAppSelector( state => state.sidebar.sidebar );
     const dispatch = useAppDispatch();
 
     return (

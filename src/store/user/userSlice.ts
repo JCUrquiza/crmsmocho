@@ -31,10 +31,13 @@ const userSlice = createSlice({
                 ...state,
                 ...action.payload
             }
+        },
+        getDataUser(state) {
+            return state;
         }
     }
 });
 
-export const { saveDataUser } = userSlice.actions;
+export const { saveDataUser, getDataUser } = userSlice.actions;
 
 export default userSlice.reducer;
