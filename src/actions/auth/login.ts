@@ -1,6 +1,6 @@
 'use server';
 
-import prisma from "@/lib/prisma";
+import prisma from '@/lib/prisma';
 import bcryptjs from 'bcryptjs';
 
 export const loginUser = async( email: string, password: string ) => {
@@ -15,6 +15,7 @@ export const loginUser = async( email: string, password: string ) => {
                 }
             },
             select: {
+                id: true,
                 nombres: true,
                 apellidoPaterno: true,
                 apellidoMaterno: true,

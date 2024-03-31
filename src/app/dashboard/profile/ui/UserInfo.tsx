@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAppSelector } from '@/store';
 import { Subtitle } from '@/components';
+import { modifyUserInformation } from '@/actions';
 
 type FormInputs = {
     nombre: string;
@@ -22,8 +23,9 @@ export const UserInfo = () => {
 
     const onSubmit: SubmitHandler<FormInputs> = async(data) => {
         if ( !data ) return;
-        
-        console.log(data);
+
+        const resp = await modifyUserInformation(userData.id, data.nombre, data.apellidoPaterno, data.apellidoMaterno, data.celular);
+        console.log(resp);
         
     }
     

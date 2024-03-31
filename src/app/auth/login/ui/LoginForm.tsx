@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import clsx from 'clsx';
-import { loginUser } from '@/actions/auth/login';
 import { store } from '@/store';
 import { saveDataUser } from '@/store/user/userSlice';
+import { loginUser } from '@/actions';
 
 type FormInputs = {
     email: string;
@@ -14,7 +14,7 @@ type FormInputs = {
 }
 
 interface UserData {
-    password: string;
+    id: number;
     nombres: string;
     apellidoPaterno: string;
     apellidoMaterno: string;
@@ -49,8 +49,10 @@ export const LoginForm = () => {
         if ( resp?.ok) {
             // Constante para tener el tipo de la respuesta
             const userData = resp.message as UserData;
+            
             // Almacenar la información del usuario en el storage
             store.dispatch( saveDataUser({
+                id: userData.id,
                 nombres: userData.nombres,
                 apellidoPaterno: userData.apellidoPaterno,
                 apellidoMaterno: userData.apellidoMaterno,
