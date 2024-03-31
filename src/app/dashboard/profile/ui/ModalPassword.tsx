@@ -17,8 +17,8 @@ export const ModalPassword = () => {
     const stateModal = useAppSelector ( state => state.modal.tickets );
     const dispatch = useDispatch();
 
-    const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
-
+    const { register, handleSubmit, formState: { errors }, getValues } = useForm<FormInputs>();
+    
     const onSubmit: SubmitHandler<FormInputs> = async(data) => {
         console.log(data);
         console.log('Click en enviar form');
@@ -49,25 +49,18 @@ export const ModalPassword = () => {
                         <div className="my-5 mr-5 ml-5 flex justify-center">
                             <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
                             {/* action="{{url_for('default.add_caretaker', apartment_id = apartment.id)}}" id="add_caretaker_form" */}
-                                <div className="">
-                                    <div className="">
+                                <div>
+                                    <div className="flex flex-col">
                                         <label className="text-md text-gray-600">Contraseña Actual:</label>
-                                        {/* for="names" */}
-                                    </div>
-                                    <div className="">
                                         <input 
                                             className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md text-black"
                                             type="password"
                                             placeholder="Nuve123!."
                                             {...register('currentPassword')}
                                         />
-                                        {/* autocomplete="off" */}
                                     </div>
-                                    <div className="">
+                                    <div>
                                         <label className="text-md text-gray-600">Nueva contraseña:</label>
-                                        {/* for="phone" */}
-                                    </div>
-                                    <div className="">
                                         <input 
                                             className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md text-black"
                                             type="password"
@@ -79,17 +72,15 @@ export const ModalPassword = () => {
                                         />
                                         { errors.newPassword && <p className='text-red-500'>{ errors.newPassword.message }</p> }
                                     </div>
-                                    <div className="">
+                                    <div>
                                         <label className="text-md text-gray-600">Repita la nueva contraseña:</label>
-                                    </div>
-                                    <div className="">
                                         <input
                                             className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md text-black"
                                             type="password"
                                             placeholder="Paleta987),"
-                                            {...register('repeatNewPassword', { pattern: {
-                                                value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[^\s]+$/,
-                                                message: 'Debe de tener al menos un número y un caracter especial'}
+                                            {...register('repeatNewPassword', {
+                                                required: 'Este campo es requerido',
+                                                validate: (value) => value === getValues('newPassword') || 'Las contraseñas no coinciden'
                                             })}
                                         />
                                         { errors.repeatNewPassword && <p className='text-red-500'>{ errors.repeatNewPassword.message }</p> }
