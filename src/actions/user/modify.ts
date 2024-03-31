@@ -6,14 +6,7 @@ export const modifyUserInformation = async( id: number, nombre: string, apellido
 
     try {
 
-        // const userToModify = prisma.usuario.findUnique({
-        //     where: {
-        //         id: +id
-        //     }
-        // });
-        // if (!userToModify) throw new Error('Usuario no encontrado');
-
-        const data = prisma.usuario.update({
+        await prisma.usuario.update({
             where: {
                 id: id,
             },
@@ -27,7 +20,7 @@ export const modifyUserInformation = async( id: number, nombre: string, apellido
 
         return {
             ok: true,
-            message: 'Usuario actualizado con éxito'
+            message: 'Usuario actualizado correctamente'
         }
         
     } catch (error) {

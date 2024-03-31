@@ -2,9 +2,11 @@
 
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useAppSelector } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store';
 import { Subtitle } from '@/components';
 import { modifyUserInformation } from '@/actions';
+import { ModalPassword } from './ModalPassword';
+import { openModalTickets } from '@/store/modal/modalSlice';
 
 type FormInputs = {
     nombre: string;
@@ -21,8 +23,13 @@ export const UserInfo = () => {
 
     const { register, handleSubmit, formState: {errors} } = useForm<FormInputs>();
 
+    const stateModal = useAppSelector( state => state.modal.tickets );
+    const dispatch = useAppDispatch();
+
     const onSubmit: SubmitHandler<FormInputs> = async(data) => {
         if ( !data ) return;
+
+        console.log(data);
 
         const resp = await modifyUserInformation(userData.id, data.nombre, data.apellidoPaterno, data.apellidoMaterno, data.celular);
         console.log(resp);
@@ -35,12 +42,22 @@ export const UserInfo = () => {
 
             <Subtitle title='Información del usuario' />
 
-            <button 
-                className='btn-primary'
-                onClick={() => setToggleModifyInfo(!toggleModifyInfo)}
-            >
-                Actualizar información
-            </button>
+            <div className='flex justify-end gap-3 my-2'>
+
+                    <button 
+                        className='btn-primary'
+                        onClick={ () => dispatch( openModalTickets() ) }
+                    >
+                        Cambiar contraseña
+                    </button>
+                    <button 
+                        className='btn-primary'
+                        onClick={() => setToggleModifyInfo(!toggleModifyInfo)}
+                    >
+                        Actualizar información
+                    </button>
+                
+            </div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -164,6 +181,14 @@ export const UserInfo = () => {
 
             </form>
 
+            {/* Modal para cambiar la contraseña */}
+            {
+                stateModal && (
+                    <ModalPassword />
+                )
+            }
+            {/* Modal para cambiar la contraseña */}
+            
         </div>
 
     )
