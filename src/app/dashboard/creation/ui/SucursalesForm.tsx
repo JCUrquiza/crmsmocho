@@ -21,23 +21,23 @@ export const SucursalesForm = () => {
 
                     <div className='flex flex-col w-1/2 m-3'>
 
-                        <label htmlFor="email">Nombre:</label>
+                        <label htmlFor="nombre">Nombre:</label>
                         <input className="px-5 py-2 border bg-gray-200 rounded mb-5 text-black" type="text" tabIndex={1} />
 
-                        <label htmlFor="email">Zona:</label>
+                        <label htmlFor="zona">Zona:</label>
                         <input className="px-5 py-2 border bg-gray-200 rounded mb-5 text-black" type="text" tabIndex={3} />
 
-                        <label htmlFor="email">Teléfono Uno:</label>
+                        <label htmlFor="telefonoUno">Teléfono Uno:</label>
                         <input className="px-5 py-2 border bg-gray-200 rounded mb-5 text-black" type="text" tabIndex={5} />
 
                     </div>
 
                     <div className='flex flex-col w-1/2 m-3'>
 
-                        <label htmlFor="email">Correo:</label>
+                        <label htmlFor="correo">Correo:</label>
                         <input className="px-5 py-2 border bg-gray-200 rounded mb-5 text-black" type="text" tabIndex={2} />
 
-                        <label htmlFor="email">Teléfono Dos:</label>
+                        <label htmlFor="telefonoDos">Teléfono Dos:</label>
                         <input className="px-5 py-2 border bg-gray-200 rounded mb-5 text-black" type="text" tabIndex={4} />
 
                         <div className='flex justify-end'>
