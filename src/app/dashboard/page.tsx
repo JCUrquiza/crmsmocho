@@ -1,8 +1,101 @@
 import React from 'react';
 import { Title } from '@/components';
 import { IoCheckmarkCircleOutline } from 'react-icons/io5';
+import crypto from 'crypto';
 
 export default function TicketsPage() {
+
+    const listTODOS = [{
+            id: crypto.randomUUID(),
+            nombre: 'Menú de opciones para desplegarse en cualquier pantalla (Tipo SideMenu).',
+            check: true
+        },{
+            id: crypto.randomUUID(),
+            nombre: 'Implementar Storage (Toolkit o Zustand).',
+            check: true
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Mejorar la distribución del topMenu',
+            check: false
+        },{
+            id: crypto.randomUUID(),
+            nombre: 'Crear initialData para áreas',
+            check: true
+        },{
+            id: crypto.randomUUID(),
+            nombre: 'Crear initialData para puestos',
+            check: true
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Crear initialData para sucursal',
+            check: true
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Crear initialData para estatus',
+            check: true
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Crear initialData para usuarios',
+            check: true
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Crear Modelo para usuarios (prisma)',
+            check: true
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Crear Modelo para tickets (prisma)',
+            check: false
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Crear Model para permisos y funcionalidad',
+            check: false
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Crear server components para creación de áreas',
+            check: false
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Crear server components para creación de sucursales',
+            check: false
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Crear server components para creación de usuarios',
+            check: false
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Mejorar lógica para mostrar esta lista',
+            check: true
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Almacenar la información obtenida del usuario del server action en redux',
+            check: true
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Mostrar la información del usuario en PerfilPage',
+            check: true
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Vista para usuario (que modifique su contraseña)',
+            check: true
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Vista para usuario (que modifique su nombre, apellidos y celular)',
+            check: true
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Server Action para modificar/actualizar los datos personales del usuario:',
+            check: true
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Password',
+            check: true
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Nombre. apellidos y celular',
+            check: true
+        }
+    ]
+
     return (
         <div className='py-[-10]'>
 
@@ -14,80 +107,23 @@ export default function TicketsPage() {
 
                     <div className='flex flex-col w-1/2 m-3'>
                         <h3>TODOS:</h3>
-                        <ul className='px-10'>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                Menú de opciones para desplegarse en cualquier pantalla (Tipo SideMenu).
-                            </li>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                Implementar Storage (Toolkit o Zustand).
-                            </li>
-                            <li> - Mejorar la distribución del topMenu</li>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                - Crear initialData para áreas
-                            </li>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                - Crear initialData para puestos
-                            </li>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                - Crear initialData para sucursal
-                            </li>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                - Crear initialData para estatus
-                            </li>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                - Crear initialData para usuarios
-                            </li>
-                            <li> - Crear initialData para tickets</li>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                - Crear Modelo para usuarios (prisma)
-                            </li>
-                            <li> - Crear Modelo para tickets (prisma)</li>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                Crear Modal (UI)
-                            </li>
-                            <li> - Crear Model para permisos y funcionalidad</li>
-                            <li> - Crear server components para creación de áreas</li>
-                            <li> - Crear server components para creación de sucursales</li>
-                            <li> - Crear server components para creación de usuarios</li>
-                            <li> - Mejorar lógica para mostrar esta lista</li>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                - Almacenar la información obtenida del usuario del server action en redux
-                            </li>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                - Mostrar la información del usuario en PerfilPage
-                            </li>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                - Vista para usuario (que modifique su contraseña)
-                            </li>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                - Vista para usuario (que modifique su nombre, apellidos y celular)
-                            </li>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                - Server Action para modificar/actualizar los datos personales del usuario:
-                            </li>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                - Password
-                            </li>
-                            <li className='flex'>
-                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
-                                - Nombre. apellidos y celular
-                            </li>
+
+                        <ul>
+
+                        {
+                            listTODOS.map( item => (
+                                    <li key={ item.id } className='flex'>
+                                        {
+                                            item.check && (
+                                                <IoCheckmarkCircleOutline size={25} />
+                                            )
+                                        }
+                                        - { item.nombre }
+                                    </li>
+                                ))
+                            }
                         </ul>
+
                     </div>
 
                     <div className='flex flex-row w-1/2 mt-3'>
