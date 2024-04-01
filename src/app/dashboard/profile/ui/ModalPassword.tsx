@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAppSelector } from '@/store';
 import { useDispatch } from 'react-redux';
 import { closeModalTickets } from '@/store/modal/modalSlice';
+import { updatePassword } from '@/actions';
 
 type FormInputs = {
     currentPassword: string;
@@ -14,14 +15,17 @@ type FormInputs = {
 
 export const ModalPassword = () => {
 
-    const stateModal = useAppSelector ( state => state.modal.tickets );
+    const stateModal = useAppSelector( state => state.modal.tickets );
     const dispatch = useDispatch();
 
     const { register, handleSubmit, formState: { errors }, getValues } = useForm<FormInputs>();
+
+    const userData = useAppSelector( state => state.user );
     
     const onSubmit: SubmitHandler<FormInputs> = async(data) => {
-        console.log(data);
-        console.log('Click en enviar form');
+        await updatePassword( userData.id, data.newPassword );
+        console.log(updatePassword);
+        await dispatch( closeModalTickets() );
     }
 
     return (

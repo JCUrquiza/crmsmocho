@@ -67,14 +67,26 @@ export default function TicketsPage() {
                                 - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
                                 - Mostrar la información del usuario en PerfilPage
                             </li>
-                            <li> - Vista para usuario (que modifique su contraseña)</li>
+                            <li className='flex'>
+                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
+                                - Vista para usuario (que modifique su contraseña)
+                            </li>
                             <li className='flex'>
                                 - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
                                 - Vista para usuario (que modifique su nombre, apellidos y celular)
                             </li>
-                            <li> - Server Action para modificar/actualizar los datos personales del usuario:</li>
-                            <li> - Password</li>
-                            <li> - Nombre. apellidos y celular</li>
+                            <li className='flex'>
+                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
+                                - Server Action para modificar/actualizar los datos personales del usuario:
+                            </li>
+                            <li className='flex'>
+                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
+                                - Password
+                            </li>
+                            <li className='flex'>
+                                - &nbsp; <IoCheckmarkCircleOutline size={25} /> &nbsp;
+                                - Nombre. apellidos y celular
+                            </li>
                         </ul>
                     </div>
 
