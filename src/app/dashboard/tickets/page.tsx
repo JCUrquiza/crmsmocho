@@ -2,9 +2,10 @@ import React from 'react';
 import { Title } from '@/components';
 import { CrearTicket } from './ui/CrearTicket';
 
-export default function TicketPage(){
+export default function TicketPage() {
 
     return (
+
         <div>
 
             <Title title='Sistema de Tickets' subTitle='Administración de tickets' />
@@ -70,6 +71,7 @@ export default function TicketPage(){
             </div>
 
         </div>
+
     )
 
 }

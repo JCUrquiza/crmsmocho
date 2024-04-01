@@ -93,6 +93,10 @@ export default function TicketsPage() {
             id: crypto.randomUUID(),
             nombre: 'Nombre. apellidos y celular',
             check: true
+        }, {
+            id: crypto.randomUUID(),
+            nombre: 'Crear InitialData para conceptos de tickets',
+            check: false
         }
     ]
 

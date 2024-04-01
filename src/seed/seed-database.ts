@@ -9,11 +9,12 @@ async function main() {
         prisma.sucursal.deleteMany(),
         prisma.estatus.deleteMany(),
         prisma.puesto.deleteMany(),
-        prisma.area.deleteMany()
+        prisma.area.deleteMany(),
+        prisma.catalogoTicket.deleteMany()
     ]);
 
     // 2.- Intertar registros:
-    const { area, puesto, estatus, sucursal, usuario } = initialData;
+    const { area, puesto, estatus, sucursal, usuario, catalogoTickets } = initialData;
     // Área:
     await prisma.area.create({
         data: area
@@ -54,7 +55,6 @@ async function main() {
     const puestoId = await prisma.puesto.findFirst();
     const sucursalId = await prisma.sucursal.findFirst();
     const estatusId = await prisma.estatus.findFirst();
-
     // Usuario
     // TODO: Falta agregar campo password
     await prisma.usuario.create({
@@ -71,7 +71,11 @@ async function main() {
             estatusId: estatusId!.id
         }
     });
-
+    // Catálogo
+    await prisma.catalogoTicket.createMany({
+        data: catalogoTickets
+    })
+    
     console.log('Seed Ejecutado Correctamente');
 }
 

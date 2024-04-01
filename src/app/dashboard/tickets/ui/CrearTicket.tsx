@@ -1,15 +1,39 @@
 'use client';
 
 import React, { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { getConcepts } from '@/actions/tickets/creating';
+
+type FormInputs = {
+    conceptoTicket: string;
+}
 
 export const CrearTicket = () => {
 
     const [viewModal, setViewModal] = useState(false);
+    const [conceptos, setConceptos] = useState<{
+        id: number;
+        nombre: string;
+    }[] | null>(null);
+
+    const handleModal = async() => {
+        setViewModal(true);
+        const respConceptos = await getConcepts();
+        if ( respConceptos?.ok ) {
+            setConceptos(respConceptos.concepts);
+        }
+    }
+
+    const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
+
+    const onSubmit: SubmitHandler<FormInputs> = async(data) => {
+        console.log(data);
+    }
 
     return (
         <div>
 
-            <button className='btn btn-primary' onClick={ () => setViewModal(true) } >Crear Ticket</button>
+            <button className='btn btn-primary' onClick={ () => handleModal() } >Crear Ticket</button>
 
             {/* Modal */}
             {
@@ -34,22 +58,34 @@ export const CrearTicket = () => {
                                 </div>
                                 {/* Body */}
                                 <div className="my-5 mr-5 ml-5 flex justify-center">
-                                    <form action="{{url_for('default.add_caretaker', apartment_id = apartment.id)}}" method="POST" id="add_caretaker_form"  className="w-full">
+                                    <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+                                        {/* action="{{url_for('default.add_caretaker', apartment_id = apartment.id)}}" */}
                                         <div className="">
-                                            <div className="">
+
+                                            <div className='flex flex-col mb-2'>
+                                                <label className="text-md text-gray-600">Concepto:</label>
+                                                <select
+                                                    className='h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md text-black'
+                                                    {...register('conceptoTicket', { required: true })}
+                                                >
+                                                    <option value="" disabled hidden>Selecciona un concepto</option>
+                                                    {
+                                                        conceptos?.map( concepto => (
+                                                            <option
+                                                                key={concepto.id} 
+                                                                value={concepto.nombre}
+                                                                className='text-black'
+                                                            >
+                                                                { concepto.nombre }
+                                                            </option>
+                                                        ))
+                                                    }
+                                                </select>
+                                            </div>
+
+                                            <div>
                                                 <label className="text-md text-gray-600">Full Names</label>
-                                                {/* for="names" */}
-                                            </div>
-                                            <div className="">
                                                 <input type="text" id="names" name="names" className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md text-black" placeholder="Example. John Doe" />
-                                                {/* autocomplete="off" */}
-                                            </div>
-                                            <div className="">
-                                                <label className="text-md text-gray-600">Phone Number</label>
-                                                {/* for="phone" */}
-                                            </div>
-                                            <div className="">
-                                                <input type="text" id="phone" name="phone" className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" placeholder="Example. 0729400426" />
                                                 {/* autocomplete="off" */}
                                             </div>
                                             <div className="">
@@ -61,25 +97,27 @@ export const CrearTicket = () => {
                                                 {/* autocomplete="off" */}
                                             </div>
                                         </div>
+
+                                        {/* Footer */}
+                                        <div className="flex justify-end pt-2 space-x-14">
+                                            <button
+                                                className="px-4 bg-gray-200 p-3 rounded text-black hover:bg-gray-300 font-semibold"
+                                                onClick={ () => setViewModal(false)}
+                                            >
+                                                Cancel
+                                            </button>
+                                        
+                                            <button
+                                                className="px-4 bg-blue-500 p-3 ml-3 rounded-lg text-white hover:bg-teal-400"
+                                            >
+                                                Confirm
+                                            </button>
+                                        </div>
+
                                     </form>
+
                                 </div>
-                                {/* Footer */}
-                                <div className="flex justify-end pt-2 space-x-14">
-                                    <button
-                                        className="px-4 bg-gray-200 p-3 rounded text-black hover:bg-gray-300 font-semibold"
-                                        onClick={ () => setViewModal(false)}
-                                    >
-                                        Cancel
-                                    </button>
-                                        
-                                    <button
-                                        className="px-4 bg-blue-500 p-3 ml-3 rounded-lg text-white hover:bg-teal-400"
-                                        onClick={ () => setViewModal(false) }
-                                    >
-                                        Confirm
-                                    </button>
-                                        
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

@@ -44,6 +44,10 @@ interface SeedUser {
     estatusId: string;
 }
 
+interface SeedCatalogoTickets {
+    nombre: string;
+}
+
 type ValidTitulo = 'Ingeniero' | 'Arquitecto';
 type ValidRole = 'admin' | 'user' | 'client';
 type ValidStatus = 'pendiente' | 'en proceso' | 'realizado';
@@ -55,6 +59,7 @@ interface SeedData {
     sucursal: SeedBranch;
     estatus: SeedStatus;
     usuario: SeedUser;
+    catalogoTickets: SeedCatalogoTickets[];
 }
 
 export const initialData: SeedData = {
@@ -100,6 +105,20 @@ export const initialData: SeedData = {
         puestoId: '1',
         sucursalId: '1',
         estatusId: '1'
-    }
+    },
+
+    catalogoTickets: [{
+        nombre: 'Sistema'
+    },{
+        nombre: 'Impresora'
+    }, {
+        nombre: 'Cableado'
+    }, {
+        nombre: 'Red Teléfono'
+    }, {
+        nombre: 'Inventario'
+    }, {
+        nombre: 'Cámaras'
+    }]
 
 }
