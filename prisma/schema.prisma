@@ -100,8 +100,8 @@ model Tickets {
   id                Int @id @default(autoincrement())
   descripcion       String
   fechaCreacion     DateTime @default(now())
-  fechaAtendido     DateTime
-  fechaResuelto     DateTime
+  fechaAtendido     DateTime?
+  fechaResuelto     DateTime?
 
   // Relations
   catalogoTicket    CatalogoTicket @relation(fields: [catalogoTicketId], references: [id])
@@ -116,5 +116,5 @@ model Tickets {
   sucursal          Sucursal @relation(fields: [sucursalId], references: [id])
   sucursalId        Int
 
-  usuarioResuelve   Int
+  usuarioResuelve   Int?
 }

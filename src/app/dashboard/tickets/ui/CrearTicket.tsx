@@ -2,10 +2,12 @@
 
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { getConcepts } from '@/actions/tickets/creating';
+import { getConcepts, saveTicket } from '@/actions/tickets/creating';
+import { useAppSelector } from '@/store';
 
 type FormInputs = {
-    conceptoTicket: string;
+    conceptoTicket: number;
+    descripcion: string;
 }
 
 export const CrearTicket = () => {
@@ -24,10 +26,18 @@ export const CrearTicket = () => {
         }
     }
 
+    const userData = useAppSelector( state => state.user );
+
     const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
 
     const onSubmit: SubmitHandler<FormInputs> = async(data) => {
         console.log(data);
+
+        // Corregir, enviar el idSucursal, no el nombre
+        const repTicketSave = await saveTicket( +data.conceptoTicket, data.descripcion, userData.id, userData.sucursalId );
+        console.log(repTicketSave);
+
+        await setViewModal(false);
     }
 
     return (
@@ -59,21 +69,19 @@ export const CrearTicket = () => {
                                 {/* Body */}
                                 <div className="my-5 mr-5 ml-5 flex justify-center">
                                     <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
-                                        {/* action="{{url_for('default.add_caretaker', apartment_id = apartment.id)}}" */}
-                                        <div className="">
 
+                                        <div className="">
                                             <div className='flex flex-col mb-2'>
                                                 <label className="text-md text-gray-600">Concepto:</label>
                                                 <select
                                                     className='h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md text-black'
                                                     {...register('conceptoTicket', { required: true })}
                                                 >
-                                                    <option value="" disabled hidden>Selecciona un concepto</option>
                                                     {
                                                         conceptos?.map( concepto => (
                                                             <option
                                                                 key={concepto.id} 
-                                                                value={concepto.nombre}
+                                                                value={concepto.id}
                                                                 className='text-black'
                                                             >
                                                                 { concepto.nombre }
@@ -82,19 +90,14 @@ export const CrearTicket = () => {
                                                     }
                                                 </select>
                                             </div>
-
                                             <div>
-                                                <label className="text-md text-gray-600">Full Names</label>
-                                                <input type="text" id="names" name="names" className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md text-black" placeholder="Example. John Doe" />
-                                                {/* autocomplete="off" */}
-                                            </div>
-                                            <div className="">
-                                                <label className="text-md text-gray-600">ID Number</label>
-                                                {/* for="id_number" */}
-                                            </div>
-                                            <div className="">
-                                                <input type="number" id="id_number" name="id_number" className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md" placeholder="Caretaker's ID number" />
-                                                {/* autocomplete="off" */}
+                                                <label className="text-md text-gray-600">Descripción (breve):</label>
+                                                <input 
+                                                    className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md text-black"
+                                                    type="text"
+                                                    placeholder="Example. John Doe"
+                                                    {...register('descripcion', { required: true })}
+                                                />
                                             </div>
                                         </div>
 

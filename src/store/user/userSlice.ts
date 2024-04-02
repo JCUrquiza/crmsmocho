@@ -9,6 +9,7 @@ interface UserState {
     correo: string;
     titulo: string;
     puestoNombre: string;
+    sucursalId: number;
     sucursalNombre: string;
 }
 
@@ -21,6 +22,7 @@ const initialState: UserState = {
     correo: '',
     titulo: '',
     puestoNombre: '',
+    sucursalId: 0,
     sucursalNombre: ''
 }
 

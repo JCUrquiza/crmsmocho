@@ -22,7 +22,7 @@ interface UserData {
     correo: string;
     titulo: string;
     puesto: { nombre: string }
-    sucursal: { nombre: string }
+    sucursal: { id: number, nombre: string }
 }
 
 export const LoginForm = () => {
@@ -49,6 +49,7 @@ export const LoginForm = () => {
         if ( resp?.ok) {
             // Constante para tener el tipo de la respuesta
             const userData = resp.message as UserData;
+            console.log(userData);
             
             // Almacenar la información del usuario en el storage
             store.dispatch( saveDataUser({
@@ -60,6 +61,7 @@ export const LoginForm = () => {
                 correo: userData.correo,
                 titulo: userData.titulo,
                 puestoNombre: userData.puesto.nombre,
+                sucursalId: userData.sucursal.id,
                 sucursalNombre: userData.sucursal.nombre
             }));
             // Y reenvío a dashboard

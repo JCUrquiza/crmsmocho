@@ -57,7 +57,7 @@ interface SeedData {
     area: SeedArea;
     puesto: SeedPosition;
     sucursal: SeedBranch;
-    estatus: SeedStatus;
+    estatus: SeedStatus[];
     usuario: SeedUser;
     catalogoTickets: SeedCatalogoTickets[];
 }
@@ -88,11 +88,17 @@ export const initialData: SeedData = {
         telefonoDos: '5566778899'
     },
 
-    estatus: {
-        codigo: 'ESTACT',
-        nombre: 'Activo',
-        color: '#f1b6c9'
-    },
+    estatus: [
+        {
+            codigo: 'ESTACT',
+            nombre: 'Activo',
+            color: '#f1b6c9'
+        },{
+            codigo: 'ESTPEN',
+            nombre: 'Pendiente',
+            color: '#b1b1b1'
+        }
+    ],
 
     usuario: {
         nombres: 'Juan Carlos',

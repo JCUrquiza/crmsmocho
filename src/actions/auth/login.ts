@@ -30,6 +30,7 @@ export const loginUser = async( email: string, password: string ) => {
                 },
                 sucursal: {
                     select: {
+                        id: true,
                         nombre: true
                     }
                 }

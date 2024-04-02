@@ -28,12 +28,8 @@ async function main() {
         }
     });
     // Estatus
-    await prisma.estatus.create({
-        data: {
-            codigo: estatus.codigo,
-            nombre: estatus.nombre,
-            color: estatus.color
-        }
+    await prisma.estatus.createMany({
+        data: estatus
     });
     // Sucursal
     await prisma.sucursal.create({
