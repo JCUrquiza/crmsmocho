@@ -1,6 +1,7 @@
 import React from 'react';
 import { Title } from '@/components';
 import { CrearTicket } from './ui/CrearTicket';
+import { getAllTickets } from '@/actions';
 
 export default function TicketPage() {
 

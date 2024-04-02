@@ -58,3 +58,53 @@ export const saveTicket = async(conceptoId: number, descripcion: string, idUsuar
 
 }
 
+export const getAllTickets = async() => {
+
+    try {
+
+        const ticketsResponse = await prisma.tickets.findMany({
+            select: {
+                id: true,
+                descripcion: true,
+                fechaCreacion: true,
+                fechaAtendido: true,
+                fechaResuelto: true,
+                catalogoTicket: {
+                    select: {
+                        id: true,
+                        nombre: true
+                    }
+                },
+                usuarioCreador: {
+                    select: {
+                        id: true,
+                        nombres: true,
+                        apellidoPaterno: true,
+                        apellidoMaterno: true,
+                        sucursal: {
+                            select: {
+                                nombre: true
+                            }
+                        }
+                    }
+                },
+                estatus: {
+                    select: {
+                        id: true,
+                        codigo: true,
+                        nombre: true
+                    }
+                }
+            }
+        });
+
+        console.log(ticketsResponse);
+
+        return ticketsResponse;
+        
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
