@@ -92,11 +92,11 @@ export const initialData: SeedData = {
         {
             codigo: 'ESTACT',
             nombre: 'Activo',
-            color: '#f1b6c9'
+            color: '#009900'
         },{
             codigo: 'ESTPEN',
             nombre: 'Pendiente',
-            color: '#b1b1b1'
+            color: '#0099ff'
         }
     ],
 

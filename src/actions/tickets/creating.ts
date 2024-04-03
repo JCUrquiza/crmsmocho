@@ -92,7 +92,8 @@ export const getAllTickets = async() => {
                     select: {
                         id: true,
                         codigo: true,
-                        nombre: true
+                        nombre: true,
+                        color: true
                     }
                 }
             }
@@ -100,7 +101,10 @@ export const getAllTickets = async() => {
 
         console.log(ticketsResponse);
 
-        return ticketsResponse;
+        return {
+            ok: true,
+            message: ticketsResponse
+        };
         
     } catch (error) {
         console.log(error);
