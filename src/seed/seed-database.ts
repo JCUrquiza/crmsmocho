@@ -15,63 +15,128 @@ async function main() {
     ]);
 
     // 2.- Intertar registros:
-    const { area, puesto, estatus, sucursal, usuario, catalogoTickets } = initialData;
-    // Área:
-    await prisma.area.create({
-        data: area
+    const { areas, puestos, estatus, sucursales, usuarios, catalogoTickets } = initialData;
+
+    // Áreas:
+    await prisma.area.createMany({
+        data: areas
     });
-    const areaId = await prisma.area.findFirst();
-    // Puesto
-    await prisma.puesto.create({
-        data: {
-            nombre: puesto.nombre,
-            areaId: areaId!.id
+    const areaSistemas = await prisma.area.findFirst({
+        where: {
+            nombre: 'Sistemas'
         }
     });
+    const areaCC = await prisma.area.findFirst({
+        where: {
+            nombre: 'Credito y cobranza'
+        }
+    });
+
+    // Puestos
+    puestos.forEach( async(puesto) => {
+
+        const { nombre } = puesto;
+        if (nombre == 'Desarrollador Frontend') {
+            await prisma.puesto.create({
+                data: {
+                    nombre: 'Desarrollador Frontend',
+                    areaId: areaSistemas!.id
+                }
+            });
+        } else {
+            await prisma.puesto.create({
+                data: {
+                    nombre: 'Control Interno',
+                    areaId: areaCC!.id
+                }
+            });
+        }
+
+    });
+
     // Estatus
     await prisma.estatus.createMany({
         data: estatus
     });
-    // Sucursal
-    await prisma.sucursal.create({
-        data: {
-            nombre: sucursal.nombre,
-            zona: sucursal.zona,
-            calle: sucursal.calle,
-            municipio: sucursal.municipio,
-            colonia: sucursal.colonia,
-            numeroInterior: sucursal.numeroInterior,
-            numeroExterior: sucursal.numeroExterior,
-            codigoPostal: sucursal.codigoPostal,
-            ciudad: sucursal.ciudad,
-            correo: sucursal.correo,
-            telefonoUno: sucursal.telefonoUno,
-            telefonoDos: sucursal.telefonoDos
+
+    // Sucursales
+    await prisma.sucursal.createMany({
+        data: sucursales
+    });
+
+    // Búsqueda de puestos
+    const puestoDesarrollador = await prisma.puesto.findFirst({
+        where: {
+            nombre: 'Desarrollador Frontend'
         }
     });
-    const puestoId = await prisma.puesto.findFirst();
-    const sucursalId = await prisma.sucursal.findFirst();
+    const puestoControlInterno = await prisma.puesto.findFirst({
+        where: {
+            nombre: 'Control Interno'
+        }
+    });
+    // Búsqueda de sucursales
+    const sucursalVallejo = await prisma.sucursal.findFirst({
+        where: {
+            nombre: 'Vallejo'
+        }
+    });
+    const sucursalGuadalajara = await prisma.sucursal.findFirst({
+        where: {
+            nombre: 'Guadalajara'
+        }
+    });
     const estatusId = await prisma.estatus.findFirst();
+
     // Usuario
-    // TODO: Falta agregar campo password
-    await prisma.usuario.create({
-        data: {
-            nombres: usuario.nombres,
-            apellidoPaterno: usuario.apellidoPaterno,
-            apellidoMaterno: usuario.apellidoMaterno,
-            titulo: 'Ingeniero',
-            celular: usuario.celular,
-            correo: usuario.correo,
-            password: usuario.password,
-            puestoId: puestoId!.id,
-            sucursalId: sucursalId!.id,
-            estatusId: estatusId!.id
+    usuarios.forEach( async(usuario) => {
+
+        const { 
+            nombres, 
+            apellidoPaterno, 
+            apellidoMaterno,
+            celular,
+            correo,
+            password
+        } = usuario;
+        if (nombres == 'Juan Carlos') {
+            await prisma.usuario.create({
+                data: {
+                    nombres,
+                    apellidoPaterno,
+                    apellidoMaterno,
+                    titulo: 'Ingeniero',
+                    celular,
+                    correo,
+                    password,
+                    puestoId: puestoDesarrollador!.id,
+                    sucursalId: sucursalVallejo!.id,
+                    estatusId: estatusId!.id
+                }
+            });
+        } else {
+            await prisma.usuario.create({
+                data: {
+                    nombres,
+                    apellidoPaterno,
+                    apellidoMaterno,
+                    titulo: 'Licenciado',
+                    celular,
+                    correo,
+                    password,
+                    puestoId: puestoControlInterno!.id,
+                    sucursalId: sucursalGuadalajara!.id,
+                    estatusId: estatusId!.id
+                }
+            });
         }
+
     });
+
     // Catálogo
     await prisma.catalogoTicket.createMany({
         data: catalogoTickets
-    })
+    });
     
     console.log('Seed Ejecutado Correctamente');
 }

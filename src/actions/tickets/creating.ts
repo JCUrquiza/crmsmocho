@@ -41,7 +41,6 @@ export const saveTicket = async(conceptoId: number, descripcion: string, idUsuar
                 catalogoTicketId: conceptoId,
                 usuarioCreadorId: idUsuarioCreador,
                 estatusId: resEstatus!.id,
-                sucursalId: idSucursal,
             }
         });
 

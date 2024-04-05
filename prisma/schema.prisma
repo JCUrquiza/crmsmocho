@@ -53,7 +53,6 @@ model Sucursal {
   telefonoDos       String
 
   Usuario           Usuario[]
-  Tickets           Tickets[]
 }
 
 model CatalogoTicket {
@@ -112,9 +111,6 @@ model Tickets {
 
   estatus           Estatus @relation(fields: [estatusId], references: [id])
   estatusId         Int
-
-  sucursal          Sucursal @relation(fields: [sucursalId], references: [id])
-  sucursalId        Int
 
   usuarioResuelve   Int?
 }
