@@ -16,7 +16,7 @@ export default async function TicketPage() {
 
             <CrearTicket />
 
-            <ListarTickets tickets={ticketsData?.message} />
+            <ListarTickets respuesta={ticketsData!.ok} tickets={ticketsData!.message} />
 
         </div>
 

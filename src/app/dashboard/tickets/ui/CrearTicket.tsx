@@ -34,7 +34,7 @@ export const CrearTicket = () => {
         console.log(data);
 
         // Corregir, enviar el idSucursal, no el nombre
-        const repTicketSave = await saveTicket( +data.conceptoTicket, data.descripcion, userData.id, userData.sucursalId );
+        const repTicketSave = await saveTicket( +data.conceptoTicket, data.descripcion, userData.id );
         console.log(repTicketSave);
 
         await setViewModal(false);

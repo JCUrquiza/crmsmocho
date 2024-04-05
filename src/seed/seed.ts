@@ -124,6 +124,14 @@ export const initialData: SeedData = {
             codigo: 'ESTPEN',
             nombre: 'Pendiente',
             color: '#0099ff'
+        }, {
+            codigo: 'ESTATE',
+            nombre: 'Atendiendo',
+            color: '#e68a00'
+        }, {
+            codigo: 'ESTRES',
+            nombre: 'Resuelto',
+            color: '#00b300'
         }
     ],
 

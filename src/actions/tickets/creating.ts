@@ -19,7 +19,7 @@ export const getConcepts = async() => {
 
 }
 
-export const saveTicket = async(conceptoId: number, descripcion: string, idUsuarioCreador: number, idSucursal: number) => {
+export const saveTicket = async(conceptoId: number, descripcion: string, idUsuarioCreador: number) => {
 
     try {
 
@@ -98,12 +98,79 @@ export const getAllTickets = async() => {
             }
         });
 
-        console.log(ticketsResponse);
+        if (ticketsResponse.length == 0) {
+            return {
+                ok: false,
+                message: 'No hay tickets'
+            }
+        }
 
         return {
             ok: true,
             message: ticketsResponse
         };
+        
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+export const updateStatusTicket = async(idTicket: number) => {
+
+    try {
+        // Buscamos los estatus a asignar
+        const estatusAtendiendo = await prisma.estatus.findFirst({
+            where: {
+                codigo: 'ESTATE'
+            }
+        });
+        const estatusResuelto = await prisma.estatus.findFirst({
+            where: {
+                codigo: 'ESTRES'
+            }
+        });
+        // Buscamos el ticket a cambiar
+        const ticketId = await prisma.tickets.findFirst({
+            where: {
+                id: idTicket
+            },
+            select: {
+                estatus: {
+                    select: {
+                        codigo: true,
+                        nombre: true
+                    }
+                }
+            }
+        });
+        if (!ticketId) throw new Error('No se encontró el ticket');
+
+        // Si el estatus es pendiente ->  atendiendo y si es atendiendo entonces atendiento -> resuelto
+        if (ticketId?.estatus.codigo == 'ESTPEN') {
+            await prisma.tickets.update({
+                where: {
+                    id: idTicket
+                }, 
+                data: {
+                    estatusId: estatusAtendiendo?.id
+                }
+            });
+        } else {
+            await prisma.tickets.update({
+                where: {
+                    id: idTicket
+                }, 
+                data: {
+                    estatusId: estatusResuelto?.id
+                }
+            });
+        }
+
+        return {
+            ok: true,
+            message: 'Ticket actualizado correctamente'
+        }
         
     } catch (error) {
         console.log(error);
